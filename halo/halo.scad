@@ -1,4 +1,4 @@
-// Created in 2020 by Your Name Here.
+// Created in 2020 by John Looney <john.looney@gmail.com>
 // This work is released with CC0 into the public domain.
 // https://creativecommons.org/publicdomain/zero/1.0/
 
