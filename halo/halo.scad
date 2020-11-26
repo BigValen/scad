@@ -11,7 +11,6 @@ ledwidth=8;
 height=6;
 wall=2.4;
 
-
 difference() {
 	difference () {
 		ring(diameter, diameter-wall*4-ledwidth*2, height);
