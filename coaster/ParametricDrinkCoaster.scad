@@ -19,8 +19,8 @@
  ************************************************************************************/
 
 // All sizes are in millimeters.  
-outerDiameter = 65;
-bottomThickness = 3;
+outerDiameter = 75;
+bottomThickness = 2;
 flangeHeight = 0.5;
 flangeThickness = 1.2;
 logo_height=0.2;
@@ -30,32 +30,39 @@ logo_height=0.2;
 // No user modifiable parameters below this line
 //
 
-$fn=200;
-
+$fn=150;
 
 module logo() {
-    translate([-46,-98,flangeHeight+flangeThickness+1.2])
-    linear_extrude(height = 0.2+0.2) {
-        scale(0.15)
-        import("LOTR9.svg");
+    translate([-80,-168.5,2.0])
+    linear_extrude(height = 2.5) {
+        scale(0.26)
+        import("LOTR9-tree.svg");
     }
 }
 
-module fillet() {
+module top_ridge() {
     rotate_extrude(convexity = 10, $fn = 180)
-    translate([outerDiameter / 2 - flangeThickness / 2, 0, 0])
-    circle(r = flangeThickness / 2, $fn = 100);
+        translate([(outerDiameter / 2 - flangeThickness / 2) - 1.5, 1.7, 0])
+        color("black") square(1.3);
+}
+module bottom_ridge () {
+    rotate_extrude(convexity = 10, $fn = 180)
+        translate([(outerDiameter / 2 - flangeThickness / 2) - 1.4, -1.0, 0])
+        color("black") square(1.1);
 }
 
-difference(){
-union() {
+
+difference() {
     difference() {
-        color("red", 0.2) cylinder(r = outerDiameter / 2, h = bottomThickness + flangeHeight);
-        translate([0, 0, bottomThickness+0.01])
-            color("cyan",0.2)
-            cylinder(r = outerDiameter / 2 - flangeThickness, flangeHeight);
+        union() {
+            difference() {
+                color("red", 0.1) cylinder(r = outerDiameter / 2, h = bottomThickness + flangeHeight);
+            }
+        }
+        logo();
     }
-    translate([0, 0, flangeHeight + bottomThickness]) fillet();
+    top_ridge();
 }
-logo();
-}
+
+bottom_ridge();
+
